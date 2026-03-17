@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edmilton Jakobsen — Salgskurs & KLP Manuser</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #E5A040;
+    --gold-light: #FDF4E7;
+    --gold-border: rgba(229,160,64,0.3);
+    --bg: #f8f7f4;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-sub: #555555;
+    --text-muted: #888888;
+    --border: #e8e8e4;
+    --klp: #004A7C;
+    --klp-light: #E8F0F8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV ── */
+  .top-nav {
+    background: #0d1b2a;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  .nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .nav-logo {
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    white-space: nowrap;
+  }
+
+  .nav-tabs {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 16px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: inherit;
+  }
+  .nav-tab:hover { color: rgba(255,255,255,0.85); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── PAGES ── */
+  .page { display: none; max-width: 1000px; margin: 0 auto; padding: 32px 20px 80px; }
+  .page.active { display: block; }
+
+  /* ══════════════════════════════════════════
+     SALGSKURS
+  ══════════════════════════════════════════ */
+  .course-header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2f4a 50%, #0d3b6e 100%);
+    border-radius: 16px;
+    padding: 44px 44px 36px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .course-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(229,160,64,0.1);
+    pointer-events: none;
+  }
+
+  .author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .author-av {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #E5A040, #c47820);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .author-name {
+    font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .course-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 36px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .course-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 520px;
+  }
+  .prog-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .prog-bar {
+    flex: 1; height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px; overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #E5A040, #F0C070);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .prog-lbl { font-size: 12px; color: rgba(255,255,255,0.45); white-space: nowrap; }
+
+  .filter-row {
+    display: flex; gap: 6px;
+    padding: 12px 0 8px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-sub);
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .filter-btn:hover { border-color: #aaa; color: var(--text); }
+  .filter-btn.active { background: #0d1b2a; color: var(--gold); border-color: var(--gold-border); }
+
+  .phase-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .phase-hdr {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .phase-hdr:hover { background: #fafafa; }
+  .phase-num {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+  .phase-info { flex: 1; }
+  .phase-name { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .phase-tag { font-size: 11px; color: var(--text-muted); }
+  .phase-chev { font-size: 20px; color: var(--text-muted); transition: transform 0.3s; }
+  .phase-chev.open { transform: rotate(90deg); }
+
+  .phase-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .phase-body.open { display: block; }
+
+  .sec-lbl {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 20px 0 10px;
+  }
+  .phase-summary {
+    font-size: 13px; color: var(--text-sub);
+    line-height: 1.7; margin-top: 18px;
+  }
+
+  .psy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 16px;
+  }
+  @media(max-width:540px){ .psy-grid { grid-template-columns: 1fr; } }
+
+  .psy-card {
+    background: #f8f8f6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .psy-icon { font-size: 18px; margin-bottom: 6px; }
+  .psy-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .psy-desc { font-size: 11px; color: var(--text-sub); line-height: 1.55; }
+
+  .belfort-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    background: var(--gold-light);
+    border: 1px solid var(--gold-border);
+    border-left: 3px solid var(--gold);
+    display: flex; gap: 10px;
+  }
+  .belfort-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .belfort-lbl {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 5px;
+  }
+  .belfort-txt { font-size: 12px; line-height: 1.6; color: var(--text); }
+
+  .keys-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .keys-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13px; line-height: 1.5;
+  }
+  .keys-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+
+  .quote-blk {
+    border-left: 3px solid var(--gold);
+    padding: 12px 0 12px 16px;
+    margin: 16px 0;
+    font-style: italic; font-size: 13px;
+    color: var(--text-sub); line-height: 1.6;
+  }
+  .quote-src {
+    font-style: normal; font-size: 11px;
+    font-weight: 600; color: var(--gold);
+    margin-top: 6px; display: block;
+  }
+
+  .next-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 20px;
+    background: #0d1b2a; color: var(--gold);
+    border: 1px solid var(--gold-border);
+    border-radius: 8px; font-size: 13px; font-weight: 500;
+    cursor: pointer; margin-top: 16px;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .next-btn:hover { background: #1a2f4a; }
+
+  /* ══════════════════════════════════════════
+     KLP MANUSER
+  ══════════════════════════════════════════ */
+  .klp-brand {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0,74,124,0.06);
+    border: 1px solid rgba(0,74,124,0.18);
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .klp-logo {
+    width: 34px; height: 34px;
+    border-radius: 8px; background: var(--klp);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .klp-tag { font-size: 12px; color: var(--text-sub); line-height: 1.5; }
+  .klp-tag strong { color: var(--text); font-weight: 500; }
+
+  .scen-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 20px;
+  }
+  @media(max-width:540px){ .scen-tabs { grid-template-columns: 1fr; } }
+
+  .scen-tab {
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 12px;
+    cursor: pointer; background: var(--card);
+    transition: all 0.25s; text-align: left;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .scen-tab:hover { border-color: #bbb; }
+  .scen-tab.active { border-width: 2px; }
+  .scen-tab-num { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+  .scen-tab-title { font-size: 13px; font-weight: 500; line-height: 1.35; margin-bottom: 4px; }
+  .scen-tab-sub { font-size: 11px; color: var(--text-muted); }
+
+  .scen-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .scen-hero { padding: 28px 28px 20px; border-bottom: 1px solid var(--border); }
+  .scen-badge {
+    display: inline-flex;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px; margin-bottom: 12px;
+  }
+  .scen-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 600;
+    line-height: 1.2; margin-bottom: 6px;
+  }
+  .scen-sub { font-size: 12px; color: var(--text-sub); }
+  .meta-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .meta-pill {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 20px;
+    background: #f4f4f0;
+    border: 1px solid var(--border);
+    color: var(--text-sub);
+  }
+
+  .phase-nav-klp {
+    display: flex; overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .phase-nav-klp::-webkit-scrollbar { display: none; }
+  .phase-nav-btn {
+    padding: 10px 18px;
+    font-size: 11px; font-weight: 500;
+    font-family: inherit;
+    white-space: nowrap;
+    background: transparent; border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; color: var(--text-muted);
+    transition: all 0.2s; margin-bottom: -1px;
+  }
+  .phase-nav-btn:hover { color: var(--text); }
+  .phase-nav-btn.active { border-bottom-color: currentColor; }
+
+  .scen-body { padding: 24px 28px; }
+
+  .phase-intro-box {
+    background: #f8f8f6;
+    border-radius: 10px; padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .phase-intro-lbl {
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted); margin-bottom: 5px;
+  }
+  .phase-intro-txt { font-size: 12px; color: var(--text-sub); line-height: 1.65; font-style: italic; }
+
+  .dialog-line { display: flex; gap: 12px; margin-bottom: 14px; }
+  .spk-chip {
+    flex-shrink: 0; width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .dlg-right { flex: 1; }
+  .spk-name {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .bubble {
+    padding: 11px 14px;
+    border-radius: 12px; font-size: 13px;
+    line-height: 1.65;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .bubble.seller { background: #f8f8f6; border-color: transparent; }
+
+  .psy-note-klp {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin: -6px 0 14px 48px;
+    padding: 8px 12px;
+    border-radius: 8px; border-left: 2px solid;
+    font-size: 11px; line-height: 1.5;
+    color: var(--text-sub);
+  }
+
+  .outcome-box-klp {
+    border-radius: 12px; padding: 18px 20px;
+    margin-top: 20px; border: 1px solid;
+  }
+  .outcome-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .outcome-text { font-size: 12px; line-height: 1.6; }
+
+  .scen-footer {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 14px 28px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-arr {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 12px; font-weight: 500; font-family: inherit;
+    cursor: pointer; border: 1px solid var(--border);
+    background: transparent; color: var(--text-sub);
+    transition: all 0.2s;
+  }
+  .nav-arr:hover { background: #f4f4f0; color: var(--text); }
+  .nav-arr:disabled { opacity: 0.3; cursor: default; }
+  .phase-ctr { font-size: 12px; color: var(--text-muted); }
+
+  @media(max-width:600px){
+    .scen-body, .scen-hero, .scen-footer { padding-left: 16px; padding-right: 16px; }
+    .psy-note-klp { margin-left: 12px; }
+    .course-header { padding: 28px 22px 24px; }
+    .phase-hdr { padding: 16px 18px; }
+    .phase-body { padding: 0 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">EJ · Salg</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('kurs',this)">Salgskurs</button>
+      <button class="nav-tab" onclick="showPage('klp',this)">KLP Manuser</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ SALGSKURS ══════════ -->
+<div class="page active" id="page-kurs">
+  <div class="course-header">
+    <div class="author-badge">
+      <div class="author-av">EJ</div>
+      <div class="author-name">Edmilton Jakobsen · Salgskurs</div>
+    </div>
+    <div class="course-title">Kunsten å selge –<br>Innsiden av hjernen</div>
+    <div class="course-sub">Mine innsikter fra år med analyse av salgsprosessen — bygget på psykologisk forskning og det jeg har lært av å studere Jordan Belforts metoder.</div>
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="prog-lbl" id="prog-lbl">0 / 6 faser</div>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="setFilter('all',this)">Alle faser</button>
+    <button class="filter-btn" onclick="setFilter('psy',this)">Psykologi</button>
+    <button class="filter-btn" onclick="setFilter('belfort',this)">Hva Belfort sier</button>
+  </div>
+
+  <div id="phases-container"></div>
+</div>
+
+<!-- ══════════ KLP MANUSER ══════════ -->
+<div class="page" id="page-klp">
+  <div class="klp-brand">
+    <div class="klp-logo">KLP</div>
+    <div class="klp-tag"><strong>KLP Forsikring — medlemsbasert.</strong> Forbeholdt ansatte med KLP-pensjonsordning. All fortjeneste tilbake til medlemmene — beste pris fra dag én.</div>
+  </div>
+  <div class="scen-tabs" id="scen-tabs"></div>
+  <div class="scen-container">
+    <div class="scen-hero" id="scen-hero"></div>
+    <div class="phase-nav-klp" id="phase-nav-klp"></div>
+    <div class="scen-body" id="scen-body"></div>
+    <div class="scen-footer">
+      <button class="nav-arr" id="btn-prev" onclick="prevPhase()">← Forrige</button>
+      <span class="phase-ctr" id="phase-ctr"></span>
+      <button class="nav-arr" id="btn-next" onclick="nextPhase()">Neste →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PAGE NAV ──────────────────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// SALGSKURS
+// ══════════════════════════════════════════════════════════════════════════
+const PHASES = [
+  {
+    num:"01", name:"Sannhetens øyeblikk", tag:"Åpningen · Kontaktfasen",
+    color:"#4e9d6f", bg:"rgba(78,157,111,0.12)",
+    summary:"Etter å ha studert tusenvis av samtaler og Belforts analyse, er konklusjonen min krystallklar: de første 4 sekundene bestemmer alt. Hjernen danner et førsteinntrykk i løpet av millisekunder — og det er nesten umulig å endre etterpå. Det er ikke fair, men det er slik vi er bygget.",
+    psy:[
+      {icon:"⚡",title:"Thin-slicing",desc:"Hjernen tar beslutninger på mikrosekunder basert på minimale signaler. Kroppsspråk og toneleie er de første filtrene — lenge før ordene dine registreres."},
+      {icon:"🪞",title:"Speilnevroner",desc:"Vi kopierer ubevisst andres energi. Den som signaliserer trygghet og kontroll, aktiverer samme tilstand hos den andre. Energien din er smittsom."},
+      {icon:"🧠",title:"Priming-effekten",desc:"De første ordene du sier setter rammen for hele samtalen. Det er ikke hva du sier — det er rekkefølgen du sier det i."},
+      {icon:"👁",title:"Halo-effekten",desc:"Et profesjonelt uttrykk gjør at folk automatisk tilskriver deg kompetanse og troverdighet. Fremtoning er strategi, ikke forfengelighet."}
+    ],
+    belfort:"Belfort sier du har 4 sekunder til å etablere tre ting: skarphet, entusiasme og ekspertstatus. Det jeg har funnet gjennom egne erfaringer er at toneleie bærer 38% av budskapet — ordene bare 7%. Resten er kroppsspråk. Jeg bruker dette bevisst i alle åpninger.",
+    keys:["Aldri åpne med 'hvordan har du det?' — det skriker selger","Et sterkt åpningsutsagn posisjonerer deg som ekspert, ikke som en som spør om lov","Match kundens energi — men led den alltid ett hakk opp"],
+    quote:"Folk kjøper ikke produkter. De kjøper versjoner av seg selv.",
+    quoteSource:"Jordan Belfort — min analyse: de kjøper den beste versjonen av sin egen fremtid."
+  },
+  {
+    num:"02", name:"Behovsanalyse", tag:"Intervjufasen",
+    color:"#3B8BD4", bg:"rgba(59,139,212,0.12)",
+    summary:"Det viktigste jeg har lært: du kan ikke selge noe som helst til noen som helst. Men du kan alltid hjelpe den rette personen til å se det de faktisk trenger. Nøkkelen er å forstå dypere enn de gjør selv — og la dem oppdage det.",
+    psy:[
+      {icon:"🎯",title:"SPIN-teknikken",desc:"Situasjon → Problem → Implikasjon → Nytteverdi. Kunden oppdager behovet selv gjennom spørsmålene dine. Det de konkluderer selv, tror de alltid på."},
+      {icon:"💬",title:"Aktiv lytting",desc:"Hjernen kobler kognitivt til den som virkelig lytter. Pauser, nikking og speiling av ord bygger dyp tillit — raskere enn noe argument."},
+      {icon:"❓",title:"Sokrates-teknikken",desc:"Still spørsmål der svaret peker mot løsningen. Kunden overtaler seg selv — det er det sterkeste salget som finnes."},
+      {icon:"🔮",title:"Fremtidsvisualisering",desc:"Når kunden beskriver ønsket fremtid, aktiverer hjernen dopaminsystemet. De motiverer seg selv — du trenger bare å stille riktig spørsmål."}
+    ],
+    belfort:"Belfort anbefaler å bruke 30% av møtet her. Det jeg har lagt til fra egne erfaringer: finn de tre driverne — det logiske behovet, det emosjonelle behovet, og smerten ved å IKKE handle. Den siste er underutnyttet av de fleste selgere.",
+    keys:["Lytt dobbelt så mye som du snakker — kunden avslører alt om du bare lar dem","Finn smertepunktet: 'Hva er det største problemet du har i dag?'","Spør om fremtiden: 'Hvordan ser drømmescenarioet ut for deg?'","En liten pause etter kundens svar er gull — da kommer det viktigste."],
+    quote:"Gi folk det de vil ha, ikke det du vil selge.",
+    quoteSource:"Et prinsipp jeg har sett Belfort bruke — og som jeg nå bruker som grunnregel i enhver samtale."
+  },
+  {
+    num:"03", name:"Salgspresentasjonen", tag:"Presentasjonsfasen",
+    color:"#9B59B6", bg:"rgba(155,89,182,0.12)",
+    summary:"Du selger ikke produktet. Du selger den beste versjonen av kundens fremtid — produktet er bare kjøretøyet dit. Det tok meg lang tid å virkelig internalisere dette, men når det klikket, endret alt seg.",
+    psy:[
+      {icon:"🎭",title:"Storytelling & hjernekjemi",desc:"En god historie frigjør oxytocin (tillit), dopamin (spenning) og kortisol (engasjement). Fakta informerer — historier selger."},
+      {icon:"📊",title:"Peak-End Rule",desc:"Hjernen husker toppen og slutten — ikke gjennomsnittet. Bygg presentasjonen rundt disse to punktene."},
+      {icon:"🪣",title:"Konseptuell overføring",desc:"Kunden må se seg selv i historien. Speilnevroner aktiveres av eksempler fra folk lik dem — relevans er det sterkeste beviset."},
+      {icon:"⚖️",title:"Anker-effekten",desc:"Presenter alltid den dyreste løsningen først. Hjernen sammenligner alt med det første tallet den ser."}
+    ],
+    belfort:"Straight Line-prinsippet: presenter logikken (produkt, selskap, deg), bygg deretter den emosjonelle tilknytningen. Belfort sier kunden må score minst 8/10 på entusiasme for produktet. Det jeg har lært: om scoren er lavere, fortsett å bygge — ikke press.",
+    keys:["Start alltid med en 'fremtidsbilde'-setning: 'Se for deg at...'","Triaden: fortell dem hva du skal si → si det → oppsummer det","Sett ankerpris høyt — all annen pris føles rimelig etterpå","Enkelhet vinner alltid. Forvirring dreper kjøpslyst."],
+    quote:"Ikke selg løsningen. Selg resultatet av løsningen.",
+    quoteSource:"Zig Ziglar — et sitat jeg har brukt som kompass i alle presentasjoner."
+  },
+  {
+    num:"04", name:"Argumentasjon", tag:"Argumentasjonsfasen",
+    color:"#C47820", bg:"rgba(229,160,64,0.12)",
+    summary:"Sann overbevisning hviler på to søyler: rasjonelle argumenter og emosjonell resonans. Det jeg har oppdaget gjennom analyse: hjernen bestemmer med følelsene og rettferdiggjør med logikken — aldri omvendt.",
+    psy:[
+      {icon:"🧪",title:"Cialdinis 6 prinsipper",desc:"Gjensidighet, forpliktelse, sosial bevis, autoritet, sympati, knapphet. Alle seks kan veves inn i én presentasjon."},
+      {icon:"🔁",title:"Kognitiv dissonans",desc:"Etter at kunden har sagt 'ja' til ett lite spørsmål, vil hjernen forbli konsistent. Start med det lille jaet — og bygg derfra."},
+      {icon:"🏅",title:"Sosial bevis",desc:"'Andre i din situasjon har valgt dette.' Hjernen er flokkdyr — jo mer konkret og nært, jo sterkere effekt."},
+      {icon:"⏰",title:"Knapphet & FOMO",desc:"Fear of Missing Out er en primitiv overlevelsesmekanisme. Reell knapphet aktiverer umiddelbar handling."}
+    ],
+    belfort:"Belfort sitt loop-konsept: presenter → lukk → håndter innvending → presenter på nytt med høyere emosjonell intensitet. Gjenta til du får et klart ja eller nei. Det jeg har lagt til: dokumenter hvilke argumenter som funker best for ulike kundetyper — og bygg et eget bibliotek.",
+    keys:["Bruk sosial bevis fra samme bransje og livssituasjon som kunden","Micro-commitment: få tre små 'ja' før du spør om det store","Knytt hvert argument direkte til det kunden SA i behovsanalysen","Bruk konkrete tall og spesifikke detaljer — vage påstander virker usanne"],
+    quote:"Overbevisning er ikke manipulasjon. Det er å hjelpe noen se det du allerede ser.",
+    quoteSource:"Robert Cialdini — et skille jeg mener er avgjørende for langsiktig salgssuksess."
+  },
+  {
+    num:"05", name:"Innvendinger", tag:"Innvendingsfasen",
+    color:"#C0392B", bg:"rgba(192,57,43,0.1)",
+    summary:"En innvending er ikke et nei. Det er en forespørsel om mer informasjon — eller et signal om at kunden ikke er trygg nok ennå. 90% av innvendinger er emosjonelle, ikke logiske. Det var en av de viktigste tingene jeg lærte.",
+    psy:[
+      {icon:"🧩",title:"Den egentlige blokkaden",desc:"Kunden sier 'for dyrt'. Egentlig sier de: 'Jeg er ikke overbevist nok om verdien.' Finn den reelle blokkaden — ikke sloss mot røykskjermen."},
+      {icon:"🤝",title:"Feel, Felt, Found",desc:"'Jeg forstår at du føler det slik. Andre følte det samme. Det de oppdaget var...' En emosjonell bro som fungerer fordi den validerer først."},
+      {icon:"🔄",title:"Reframing",desc:"Endre referanserammen. 'For dyrt' → 'Hva koster det deg å IKKE handle nå?' Smerten ved passivitet er alltid sterkere."},
+      {icon:"🎯",title:"Isoler og adresser",desc:"'Bortsett fra pris, er dette løsningen du ønsker?' Isolerer innvendingen og eliminerer alle andre hindre i ett spørsmål."}
+    ],
+    belfort:"Belfort er krystallklar: det finnes bare to ekte innvendinger — manglende tillit til produktet, eller manglende tillit til deg. Alt annet er røykskjerm. Gjennom egne erfaringer har jeg bekreftet dette gang på gang.",
+    keys:["Argumenter aldri direkte mot innvendingen — det aktiverer motstand","Valider alltid: 'Det er et godt spørsmål' / 'Det forstår jeg'","Bruk historier om andre som hadde samme tvil — og som angret på å vente","Avslutt aldri med en innvending — avslutt alltid med et spørsmål"],
+    quote:"Innvendinger er ikke muren. De er trappene til salget.",
+    quoteSource:"Jordan Belfort — en formulering som virkelig endret perspektivet mitt på motstand."
+  },
+  {
+    num:"06", name:"Closing", tag:"Avslutningsfasen",
+    color:"#1A3A5C", bg:"rgba(26,58,92,0.1)",
+    summary:"Closing er ikke et triks — det er konsekvensen av at alle de forrige stegene ble gjort riktig. Men det krever fortsatt teknikk å hjelpe kunden over den siste terskelen: beslutningsangsten. Det er her mange gir opp for tidlig.",
+    psy:[
+      {icon:"🧊",title:"Analysis Paralysis",desc:"For mange valg → ingen beslutning. Presenter alltid to alternativer maks. Illusjonen av kontroll aktiverer beslutningsevnen."},
+      {icon:"🎁",title:"Assumptive Close",desc:"Snakk som om beslutningen allerede er tatt. 'Ønsker du eFaktura eller avtalegiro?' — ikke 'vil du kjøpe?'. Framing bestemmer utfall."},
+      {icon:"🕰",title:"Tap-aversjon",desc:"Tap er 2x mer motiverende enn gevinst (Kahneman). Hva MISTER kunden ved å vente? Gjør det konkret og reelt."},
+      {icon:"🔒",title:"Post-salg: reduser dissonans",desc:"Bekreft kjøpet umiddelbart. Et enkelt 'du tok rett beslutning' gjør stor forskjell for å forebygge anger."}
+    ],
+    belfort:"Belfort sin closing-teknikk: tre strake ja-spørsmål, deretter det direkte closingspørsmålet. Det jeg har lagt til: tausheten etter closing-spørsmålet er obligatorisk. Den som snakker først taper — og det er en av de hardeste tingene å lære seg.",
+    keys:["Aldri si 'hva tenker du?' etter presentasjonen — det åpner for tvil","Taushet etter closing-spørsmålet er ikke ubehagelig — det er kraftfullt","To alternativer: gjør det til et valg mellom A og B, aldri A og ingenting","80% av salg skjer etter femte kontakt — de fleste gir opp for tidlig"],
+    quote:"Avslutt hvert salg som om du tror på produktet med hele sjelen din — for det bør du.",
+    quoteSource:"Jordan Belfort — og det er dette jeg mener skiller de beste fra resten."
+  }
+];
+
+let openPhases = new Set([0]);
+let completedPhases = new Set();
+let currentFilter = 'all';
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPhases();
+}
+
+function renderPhases() {
+  const c = document.getElementById('phases-container');
+  c.innerHTML = '';
+  PHASES.forEach((p, i) => {
+    const isOpen = openPhases.has(i);
+    const isDone = completedPhases.has(i);
+    const div = document.createElement('div');
+    div.className = 'phase-card';
+
+    let body = `<p class="phase-summary">${p.summary}</p>`;
+    if (currentFilter !== 'belfort') {
+      body += `<div class="sec-lbl">Psykologiske mekanismer</div>
+      <div class="psy-grid">${p.psy.map(ps=>`
+        <div class="psy-card">
+          <div class="psy-icon">${ps.icon}</div>
+          <div class="psy-title">${ps.title}</div>
+          <div class="psy-desc">${ps.desc}</div>
+        </div>`).join('')}
+      </div>`;
+    }
+    if (currentFilter !== 'psy') {
+      body += `<div class="sec-lbl">Hva jeg har lært av Belfort</div>
+      <div class="belfort-box">
+        <div class="belfort-icon">⚡</div>
+        <div><div class="belfort-lbl">Min analyse</div><div class="belfort-txt">${p.belfort}</div></div>
+      </div>`;
+    }
+    body += `<div class="sec-lbl">Mine nøkkelteknikker</div>
+    <ul class="keys-list">${p.keys.map(k=>`<li>${k}</li>`).join('')}</ul>
+    <div class="quote-blk">"${p.quote}"<span class="quote-src">— ${p.quoteSource}</span></div>`;
+
+    if (isDone) {
+      body += `<div style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(78,157,111,0.1);border:1px solid rgba(78,157,111,0.3);border-radius:20px;font-size:12px;color:#4e9d6f;">✓ Fullført</div>`;
+    } else if (i < PHASES.length - 1) {
+      body += `<button class="next-btn" onclick="markDone(${i});openPhase(${i+1})">Neste fase: ${PHASES[i+1].name} →</button>`;
+    } else {
+      body += `<button class="next-btn" onclick="markDone(${i})">✓ Fullfør kurs</button>`;
+    }
+
+    div.innerHTML = `
+      <div class="phase-hdr" onclick="togglePhase(${i})">
+        <div class="phase-num" style="background:${p.bg};color:${p.color}">${isDone?'✓':p.num}</div>
+        <div class="phase-info">
+          <div class="phase-name">${p.name}</div>
+          <div class="phase-tag">${p.tag}</div>
+        </div>
+        <div class="phase-chev ${isOpen?'open':''}">›</div>
+      </div>
+      <div class="phase-body ${isOpen?'open':''}">${isOpen?body:''}</div>`;
+    c.appendChild(div);
+  });
+  updateProg();
+}
+
+function togglePhase(i) {
+  openPhases.has(i) ? openPhases.delete(i) : openPhases.add(i);
+  renderPhases();
+}
+function openPhase(i) {
+  openPhases.add(i);
+  renderPhases();
+  setTimeout(()=>{
+    const cards = document.querySelectorAll('.phase-card');
+    if(cards[i]) cards[i].scrollIntoView({behavior:'smooth',block:'start'});
+  },50);
+}
+function markDone(i) { completedPhases.add(i); renderPhases(); }
+function updateProg() {
+  const pct = Math.round((completedPhases.size/PHASES.length)*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-lbl').textContent = completedPhases.size+' / '+PHASES.length+' faser';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// KLP MANUSER
+// ══════════════════════════════════════════════════════════════════════════
+const SCENARIOS = [
+  {
+    id:0,color:"#004A7C",bgColor:"rgba(0,74,124,0.07)",borderColor:"rgba(0,74,124,0.28)",
+    label:"Scenario 1",title:"Bilforsikring — innvending, closet på telefon",
+    subtitle:"Kunden sammenligner pris — KLP-modellen og humor snur bildet",
+    meta:["KLP-medlem · 36 år","VW ID.4 2022","Innkommende · Ca. 10 min"],
+    outcome:"closed",outcomeText:"KLP-fellesskapet og humoren om kolleger på pauserommet snur bildet. Kunden forstår at det beste tilbudet allerede er på bordet og setter forsikringen i gang.",
+    phases:[
+      {name:"Åpning",intro:"Innkommende samtale fra et KLP-medlem. Kunden vet selv hvor de jobber og har pensjonsordning — selger trenger ikke forklare dette. Åpningen posisjonerer KLP som annerledes og selger som rådgiver fra sekund én.",
+        lines:[
+          {s:"S",t:"Takk for at du ringer KLP Forsikring, du snakker med Ida. Hva kan jeg hjelpe deg med i dag?"},
+          {s:"K",t:"Hei, jeg vil se på bilforsikring. Har en VW ID.4 fra 2022 og holder på å bytte selskap."},
+          {s:"S",t:"Veldig bra timing — og smart å sjekke markedet. Bare så du vet: KLP fungerer litt annerledes enn de fleste. Kan jeg fortelle deg raskt hva som skiller oss, mens vi ser på tilbudet ditt?"},
+          {s:"K",t:"Ja, det er greit."},
+        ],notes:[{line:2,icon:"🧠",text:"'Litt annerledes enn de fleste' — vekker nysgjerrighet og differensierer før konkurrentene nevnes. Kunden er nå åpen for et nytt perspektiv."}]},
+      {name:"Behovsanalyse",intro:"Kartlegg dekning og bruksmønster — og avdekk om kunden har erfaring med prisforhandling hos nåværende selskap. Det er det kraftigste innspillet til KLP-argumentet.",
+        lines:[
+          {s:"S",t:"Hva slags dekning har du i dag, og hva betaler du?"},
+          {s:"K",t:"Kasko med veihjelp. Betaler rundt 950 kroner i måneden."},
+          {s:"S",t:"Hva er det som trigger deg til å se deg rundt nå — er det prisen, eller er det dekningen?"},
+          {s:"K",t:"Mest prisen. Jeg synes det virker dyrt for det jeg har."},
+          {s:"S",t:"Har du fått rabatt eller priskutt hos dem noen gang — enten du ba om det, eller at de tilbød det?"},
+          {s:"K",t:"Faktisk ja — første gang jeg ringte og truet med å bytte, fikk jeg litt billigere. Men nå er det oppe igjen."},
+          {s:"S",t:"Det er et veldig typisk mønster hos vanlige forsikringsselskaper. Det er faktisk derfor KLP ble bygget annerledes. Kan jeg forklare?"},
+          {s:"K",t:"Ja, det er jeg nysgjerrig på."},
+        ],notes:[
+          {line:4,icon:"🎯",text:"Spørsmålet om rabatthistorikk avdekker at kunden allerede har erfart systemet KLP tar avstand fra. Argumentet treffer nå på personlig erfaring, ikke teori."},
+          {line:5,icon:"⚡",text:"Kunden bekrefter selv at de har blitt behandlet urettferdig. Smertepunktet er synlig uten at selger måtte peke på det."}
+        ]},
+      {name:"KLP-modellen",intro:"KLP er medlemsbasert og forbeholdt dem som allerede har KLP-pensjonsordning. Kundene er faktisk kolleger i ordets rette forstand. Humoren om pauserommet treffer presist i denne målgruppen.",
+        lines:[
+          {s:"S",t:"KLP er et medlemsbasert forsikringsselskap — og siden du allerede er KLP-medlem gjennom pensjonsordningen din, er du faktisk del av et fellesskap der alle stiller likt. All fortjeneste vi gjør går tilbake til deg og de andre medlemmene. Og det viktigste: vi gir deg det beste vi kan fra første samtale. Det finnes ikke et skjult tilbud vi holder igjen til du truer med å bytte."},
+          {s:"K",t:"Åja, så det er ikke noe å forhandle om?"},
+          {s:"S",t:"Nei — og det er litt av vitsen. Siden mange av dere faktisk er kolleger på jobb, hadde det blitt ganske pinlig på pauserommet om noen fikk 200 kroner billigere bare fordi de ringte og maste. Det sparer vi alle for, haha."},
+          {s:"K",t:"Haha, det er jo et veldig godt poeng. Det er litt irriterende det der, egentlig."},
+          {s:"S",t:"Ja, og det er akkurat den frustrasjonen KLP er bygget for å fjerne. Du skal ikke trenge å være en forhandler for å få en rettferdig pris."},
+        ],notes:[
+          {line:0,icon:"🏅",text:"Kunden er allerede KLP-medlem via pensjonsordningen — selger bekrefter det og gjør det til en fordel. Fellesskapsargumentet aktiverer tilhørighetsfølelse."},
+          {line:2,icon:"😄",text:"Humor som treffer presist: kundene er faktisk kolleger. 'Pinlig på pauserommet' er et bilde alle kjenner seg igjen i. Latter bygger tillit og gjør selgeren minneverdig."},
+          {line:3,icon:"💬",text:"Kunden bekrefter selv frustrasjonen. Selger behøver ikke si mer — kunden har byttet side mentalt."}
+        ]},
+      {name:"Tilbud",intro:"Presenter tilbudet trygt og konkret. Ikke gjenta KLP-argumentene — det er sagt. Fokuser på verdi og pris.",
+        lines:[
+          {s:"S",t:"For din ID.4, 2022-modell, med vår Kasko Pluss — som inkluderer veihjelp, leiebil i 30 dager og glassforsikring — ser jeg 860 kroner i måneden. Det er vårt beste tilbud, og det er det eneste tilbudet vi har."},
+          {s:"K",t:"Det er jo 90 kroner billigere enn det jeg betaler nå."},
+          {s:"S",t:"Ja, og du slipper å ringe og forhandle for å beholde det. Prisen reflekterer alltid det reelle bildet — ikke at noen skal tjene mer på deg over tid."},
+          {s:"K",t:"Det er veldig tiltrekkende, faktisk."},
+        ],notes:[
+          {line:0,icon:"⚖️",text:"'Det eneste tilbudet vi har' signaliserer integritet og fjerner mistanken om et bedre skjult tilbud."},
+          {line:2,icon:"🔮",text:"Kort og tydelig forventningsstyring — uten å gjenta hele KLP-argumentet."}
+        ]},
+      {name:"Innvending",intro:"Kunden vil sjekke konkurrentene — naturlig. Ikke motarbeid det. Plant et frø om hva de faktisk sammenligner mot.",
+        lines:[
+          {s:"K",t:"Jeg har lyst til å sjekke et par til bare, så jeg er sikker."},
+          {s:"S",t:"Det er helt fornuftig. Det eneste jeg vil be deg om å huske på når du sammenligner: spør dem om prisen er den beste de kan gi deg, eller om det finnes en bedre deal om du ber om det. Svaret der sier ganske mye."},
+          {s:"K",t:"Ja, det er et godt poeng."},
+          {s:"S",t:"Og om du kommer tilbake til oss, er tilbudet det samme. Ingen tidspresse, ingen 'kampanje som løper ut'. Det er ikke sånn vi jobber."},
+          {s:"K",t:"Egentlig... jeg vet jo hva de andre kommer til å si. Jeg har vært gjennom det før. Kan vi bare sette det opp nå?"},
+        ],notes:[
+          {line:1,icon:"🧠",text:"Revers psykologi: selger oppmuntrer til sammenligning og gir kunden en test å stille konkurrentene."},
+          {line:3,icon:"🔒",text:"'Ingen tidspresse' fjerner det siste presset — paradoksalt nok det som akselererer beslutningen."},
+          {line:4,icon:"⚡",text:"Kunden lukker seg selv. Den psykologiske reisen gjennom KLP-modellen gjorde jobben."}
+        ]},
+      {name:"Closing",intro:"Gjennomfør enkelt og trygt. Spør om betalingsmåte som naturlig del av oppsettet, bekreft via e-post, og avslutt med å invitere til videre kontakt.",
+        lines:[
+          {s:"S",t:"Supert! Ønsker du eFaktura eller avtalegiro?"},
+          {s:"K",t:"eFaktura passer best for meg."},
+          {s:"S",t:"Perfekt. Du mottar en bekreftelse på e-post så snart forsikringen er aktiv. Og et lite tips: logg inn på klp.no og ta en titt rundt — der finner du forsikringsbeviset ditt, kan melde skade, og har full oversikt."},
+          {s:"K",t:"Det skal jeg gjøre. Takk!"},
+          {s:"S",t:"Velkommen til KLP! Ta gjerne kontakt med oss om det er noe mer vi kan hjelpe deg med. Vi er her for hverdagens helter. Ha en fin dag!"},
+        ],notes:[
+          {line:0,icon:"🎁",text:"Betalingsmåte som første spørsmål er en klassisk assumptive teknikk — selger handler som om beslutningen er tatt."},
+          {line:2,icon:"✅",text:"KLP.no-anbefaling bygger eierskap og lojalitet."},
+          {line:4,icon:"🏅",text:"'Hverdagens helter' anerkjenner målgruppen med varme. Åpen dør for fremtidig kontakt."}
+        ]}
+    ]
+  },
+  {
+    id:1,color:"#1A6B3C",bgColor:"rgba(26,107,60,0.07)",borderColor:"rgba(26,107,60,0.28)",
+    label:"Scenario 2",title:"Totalpakke 83 000 kr — møte bookes",
+    subtitle:"Kunden trenger tid — to-alternativ teknikk gir møte tirsdag kl. 13",
+    meta:["KLP-medlem · 43 år","Ny enebolig · Hus, 2 biler, innbo, liv","Innkommende · Ca. 12 min"],
+    outcome:"meeting",outcomeText:"Kunden er overveldet av pakken og trenger tid. Selger bruker to-alternativ teknikk og booker møtet direkte. Møtebekreftelse sendes på SMS.",
+    phases:[
+      {name:"Åpning",intro:"Innkommende call fra et KLP-medlem som nettopp har kjøpt bolig. Med en potensiell portefølje på 80 000+ er det kritisk å ikke prøve å lukke på telefon.",
+        lines:[
+          {s:"S",t:"Takk for at du ringer KLP Forsikring, du snakker med Anders. Hva kan jeg hjelpe deg med?"},
+          {s:"K",t:"Hei, jeg har akkurat kjøpt meg enebolig og vil egentlig samle all forsikringen min ett sted. Jeg har ingenting skikkelig på plass ennå."},
+          {s:"S",t:"Gratulerer — det er en stor dag! Og det er veldig klokt å tenke helhetlig fra starten. For å gi deg den beste løsningen vil jeg stille deg noen spørsmål først, så vi ikke setter opp noe generisk, men noe som faktisk passer din situasjon. Er det greit?"},
+          {s:"K",t:"Ja, absolutt."},
+        ],notes:[{line:2,icon:"🧠",text:"'Ikke noe generisk' — posisjonerer selger som rådgiver, ikke bestiller. Aktiverer kundens ønske om å bli sett som et individ."}]},
+      {name:"Behovsanalyse",intro:"Kunden er KLP-medlem med pensjonsordning gjennom arbeidsgiver — men er ikke nødvendigvis klar over hva den dekker ved langvarig sykdom. Hjelp kunden å se risikoen selv.",
+        lines:[
+          {s:"S",t:"Kan jeg spørre — er det bare huset du tenker på, eller er det andre forsikringer du vil se på samtidig?"},
+          {s:"K",t:"Vi vil ha hus, innbo, to biler, og jeg har begynt å tenke på livsforsikring. Vi har barn."},
+          {s:"S",t:"Da snakker vi om en helhetlig gjennomgang av hele livssituasjonen din. Fortell meg litt om huset — enebolig, rekkehus?"},
+          {s:"K",t:"Enebolig fra 1994, kjøpte den for 6,2 millioner."},
+          {s:"S",t:"Og bilene — hva slags biler er det?"},
+          {s:"K",t:"En Tesla Model Y og en Volvo V60, 2018."},
+          {s:"S",t:"Og livsforsikringen — har du tenkt på hva som skjer med familieøkonomien om du ikke kan jobbe i lengre tid? Mange av våre medlemmer er faktisk ikke helt klar over hva pensjonsordningen deres dekker i en slik situasjon."},
+          {s:"K",t:"Nei, det har jeg egentlig ikke tenkt nøye gjennom. Vi har to barn og boliglån, så det er jo litt skummelt å tenke på."},
+          {s:"S",t:"Det forstår jeg godt. Og det er nøyaktig derfor det er viktig å se på det nå — slik at dere er trygge uansett hva som skjer."},
+        ],notes:[
+          {line:6,icon:"🎯",text:"Selger åpner for risikobevisstheten uten å skremme — peker på at mange KLP-medlemmer ikke kjenner sin egen dekning."},
+          {line:7,icon:"💬",text:"'Litt skummelt å tenke på' er et sterkt signal om at behovet er reelt og motivasjonen er til stede."}
+        ]},
+      {name:"KLP-modellen",intro:"Presenter KLP-filosofien som en trygghet i en stor beslutning. Inkluder humor om kollegene på personalrommet — det treffer like godt her.",
+        lines:[
+          {s:"S",t:"Før jeg setter opp et estimat, vil jeg fortelle deg noe om hvordan KLP fungerer. Siden du allerede er KLP-medlem gjennom pensjonsordningen din, er du del av et fellesskap der all fortjeneste går tilbake til medlemmene. Det betyr at vi gir deg det beste vi kan fra dag én — ingen skjult pris, ingen forhandling."},
+          {s:"K",t:"Okei, det visste jeg faktisk ikke."},
+          {s:"S",t:"Ja, mange er ikke klar over det. Og siden mange av dere faktisk er kolleger på jobb, hadde det ikke gått lenge på personalrommet om vi hadde holdt tilbake på prisen, haha. Alle får det samme — og det er det som gjør oss annerledes."},
+          {s:"K",t:"Haha, ja det stemmer jo. Det er faktisk viktig for meg — jeg vil ikke ha den der katt-og-mus-leken hvert år."},
+          {s:"S",t:"Nettopp. Og det gir ekstra mening når du er i ferd med å samle alt ett sted for lang tid."},
+        ],notes:[
+          {line:0,icon:"🏅",text:"KLP-tilhørigheten bekreftes: kunden er allerede medlem. Selger gjør dette til en fordel de har, ikke noe de kjøper."},
+          {line:2,icon:"😄",text:"Humoren om personalrommet treffer like godt her. Lett, troverdig og minneverdig."},
+          {line:3,icon:"💬",text:"Kunden formulerer selv avskyen mot prisforhandling. Frøet er plantet — kunden vanner det selv."}
+        ]},
+      {name:"Estimat & møte",intro:"Gi et tydelig estimat. Når kunden sier de trenger tid, bruk to-alternativ teknikken til å booke møtet direkte. Møtebekreftelse sendes på SMS.",
+        lines:[
+          {s:"S",t:"Jeg setter opp et raskt estimat mens vi snakker. Hus på 6,2 millioner, Tesla Kasko Pluss, Volvo Kasko, innbo for enebolig, og livsforsikring... vi snakker om en samlet årspremie i størrelsesorden 80 000 til 85 000 kroner — altså rundt 7 000 i måneden."},
+          {s:"K",t:"Det er... mer enn jeg hadde sett for meg, egentlig."},
+          {s:"S",t:"Det forstår jeg godt. Og for å sette det i perspektiv: du beskytter en bolig til 6,2 millioner, to biler, alt du eier, og familiens inntektsgrunnlag. Men dette er et overordnet estimat — det eksakte tilbudet vil vi gå gjennom ordentlig, der vi ser på hva som er nødvendig og hva som er valgfritt for deg."},
+          {s:"K",t:"Ja, det er mye å sette seg inn i. Jeg trenger litt tid til å tenke."},
+          {s:"S",t:"Det er helt forståelig. Det beste vi kan gjøre er å sette av litt tid til å gå gjennom det skikkelig sammen. Passer det best for deg mandag kl. 10 eller tirsdag kl. 13?"},
+          {s:"K",t:"Tirsdag kl. 13 fungerer bra for meg!"},
+          {s:"S",t:"Perfekt. Du mottar møtebekreftelse på SMS om kort tid, og jeg stiller forberedt med et konkret tilbud basert på det du har fortalt meg i dag."},
+        ],notes:[
+          {line:1,icon:"⚖️",text:"Kunden reagerer på summen — forventet og sunt. Selger lar reaksjonen lande uten å forsvare seg."},
+          {line:4,icon:"🎯",text:"To-alternativ booking: selger tilbyr to konkrete tidspunkter. Kunden velger mellom A og B — aldri mellom ja og nei."},
+          {line:6,icon:"🔮",text:"SMS-bekreftelse er konkret og uformell. 'Du trenger ikke gjøre noe' fjerner all friksjon."}
+        ]},
+      {name:"Avslutning",intro:"Rund av samtalen varmt og trygt. Kunden er glad for møtet — bekreft verdien og avslutt positivt.",
+        lines:[
+          {s:"K",t:"Det er veldig bra — jeg ser frem til det."},
+          {s:"S",t:"Det gjør jeg også. I møtet går vi gjennom hvert produkt, hva det dekker, og hva som faktisk passer for deg — ingen beslutning du trenger å ta på stedet. Målet er at du sitter igjen med full trygghet. Til tirsdag, og gratulerer igjen med huset!"},
+          {s:"K",t:"Tusen takk! Ha det bra."},
+        ],notes:[{line:1,icon:"🔒",text:"'Ingen beslutning på stedet' fjerner det siste presset. Kunden er avslappet og positiv — noe som paradoksalt øker sjansen for kjøp i møtet."}]}
+    ]
+  },
+  {
+    id:2,color:"#6B2D8B",bgColor:"rgba(107,45,139,0.07)",borderColor:"rgba(107,45,139,0.28)",
+    label:"Scenario 3",title:"Personforsikring + mersalg bil & hund",
+    subtitle:"Full tillit via kollegareferral — alt samlet på én samtale",
+    meta:["KLP-medlem · 49 år","Uføre + kritisk sykdom + bil + hund","Innkommende · Ca. 14 min"],
+    outcome:"fast",outcomeText:"Kunden er varm inn via kollegareferral. Innbo og reise beholdes i forbundet — selger anerkjenner dette ærlig. Bil og hund flyttes naturlig til KLP. Alt closet på én samtale.",
+    phases:[
+      {name:"Åpning",intro:"Innkommende call med referral fra en kollega — bokstavelig talt, da begge er KLP-berettigede offentlig ansatte. Selger trenger ikke spørre om kunden jobber.",
+        lines:[
+          {s:"S",t:"Takk for at du ringer KLP Forsikring, du snakker med Karianne. Hva kan jeg hjelpe deg med?"},
+          {s:"K",t:"Hei, en kollega av meg fortalte om KLP og at det var veldig bra. Jeg har aldri hatt personforsikring og tenker at det er på tide å få det på plass."},
+          {s:"S",t:"Det er veldig hyggelig å høre — og absolutt på tide. Personforsikring er noe mange utsetter lenger enn de burde. Og det er jo ikke tilfeldig at kollegaen din anbefalte oss — som KLP-medlem har du allerede tilgang til oss gjennom jobben. Kan jeg spørre litt om situasjonen din?"},
+          {s:"K",t:"Ja, det er fint."},
+        ],notes:[{line:2,icon:"🏅",text:"Referralen bekreftes og kobles til KLP-tilhørigheten: 'allerede tilgang gjennom jobben'. Kunden eier dette — de aktiverer noe de allerede har krav på."}]},
+      {name:"Behovsanalyse",intro:"Kunden er offentlig ansatt og KLP-berettiget — kjent via referralen. Selger hopper over 'jobber du i dag?' og går rett på familiesituasjon og risikoeksponering.",
+        lines:[
+          {s:"S",t:"Siden kollegaen din er KLP-medlem, antar jeg at du også har pensjonsordningen gjennom jobben. Det betyr at du har et visst sikkerhetsnett — men det dekker sjelden alt ved langvarig sykdom. Har du barn, boliglån, eller andre faste utgifter du er avhengig av inntekten for å dekke?"},
+          {s:"K",t:"Ja, tre barn og vi har boliglån på 2,8 millioner."},
+          {s:"S",t:"Da er bildet ganske tydelig. Du har en familieøkonomi som hviler mye på at du kan jobbe. La meg spørre deg direkte: hva ville skjedd med hverdagen dersom du ble alvorlig syk i ett eller to år?"},
+          {s:"K",t:"Det ville blitt veldig krevende. Mannen min tjener, men ikke nok til å dekke alt alene."},
+          {s:"S",t:"Det er nøyaktig den situasjonen uføreforsikring og kritisk sykdom er laget for å løse."},
+        ],notes:[
+          {line:0,icon:"🎯",text:"Selger bruker referralen aktivt til å etablere KLP-tilhørigheten uten å spørre. Smidig og naturlig."},
+          {line:2,icon:"🔮",text:"Fremtidsvisualisering med et direkte spørsmål. Kunden svarer med sin faktiske hverdagssituasjon."},
+          {line:3,icon:"💬",text:"Kunden formulerer selv risikoen. Selger behøver ikke overbevise — kunden har allerede forstått behovet."}
+        ]},
+      {name:"Tilbud & bro",intro:"Presenter de to produktene med konkrete scenarioer. Etter positiv respons — ikke close isolert. Bruk familiesituasjonen som naturlig bro til å kartlegge hele porteføljen.",
+        lines:[
+          {s:"S",t:"Basert på det du har fortalt meg, vil jeg anbefale to produkter. Uføreforsikring: hvis du ikke kan jobbe i mer enn ett år, betaler vi deg 35 000 kroner i måneden frem til du er 67 — det holder lånet og hverdagen på plass. Kritisk sykdom: hvis du får en alvorlig diagnose — kreft, hjerteinfarkt eller slag — betaler vi ut 500 000 kroner som engangssum. Samlet: 1 290 kroner i måneden."},
+          {s:"K",t:"Okay... det er ikke så ille som jeg fryktet."},
+          {s:"S",t:"Nei, og for en familie i din situasjon er det ikke en stor kostnad sett opp mot hva det beskytter. Nå som jeg har hørt litt om familiesituasjonen din — kan vi ikke se om vi kan samle alle forsikringene dine hos oss og spare deg og familien litt mer, så dere kan bruke de ekstra kronene på dere selv i stedet?"},
+          {s:"K",t:"Ja, det hadde jo vært fint!"},
+        ],notes:[
+          {line:0,icon:"🎭",text:"Konkrete scenarioer aktiverer hjernen mer enn produktnavn. Kunden ser nøyaktig hva de kjøper."},
+          {line:2,icon:"🧩",text:"Bro til mersalg via familiesituasjonen. 'Spare til dere selv' er et emosjonelt og effektivt argument."}
+        ]},
+      {name:"Mersalg",intro:"Kunden er åpen og positiv. Selger kartlegger øvrige forsikringer — starter med innbo og reise, anerkjenner forbundsforsikringen ærlig, og finner bil og hund som naturlig neste steg.",
+        lines:[
+          {s:"S",t:"Hvor har du innbo- og reiseforsikringen din i dag?"},
+          {s:"K",t:"Det har jeg gjennom forbundet."},
+          {s:"S",t:"Det er kjempebra! Forbundsforsikring er faktisk det rimeligste alternativet i markedet for innbo og reise — det skal du absolutt beholde. Hvilke andre forsikringer har du da?"},
+          {s:"K",t:"Jeg har bil og hund."},
+          {s:"S",t:"Perfekt. Da er det bil og hund vi kan se på. Hva betaler du omtrent for dem samlet i dag?"},
+          {s:"K",t:"Bilen er rundt 700 kroner i måneden, og hunden er 350. Så 1 050 totalt."},
+          {s:"S",t:"Takk. For bilen og hundeforsikringen kan vi ligge rundt 980 kroner samlet. Men det som egentlig er verdien her er ikke bare de 70 kronene — det er at du nå har personforsikring, bil og hund samlet ett sted. Én faktura, ett kontaktpunkt, full oversikt."},
+          {s:"K",t:"Det høres faktisk veldig fristende ut. Det er litt stressende å ha ting spredt."},
+          {s:"S",t:"Ja, og det er akkurat det mange sier når de samler det. Vil du at vi ordner alt nå, mens vi er i gang?"},
+          {s:"K",t:"Ja, la oss gjøre det!"},
+        ],notes:[
+          {line:2,icon:"🤝",text:"Selger anerkjenner forbundsforsikringen ærlig — prøver ikke å ta den. Dette bygger enorm tillit."},
+          {line:2,icon:"🎯",text:"'Hvilke andre forsikringer har du?' er en naturlig kartlegging. Kunden gir selv informasjonen som leder til mersalget."},
+          {line:6,icon:"🧩",text:"Selger selger oversikt og enkelhet. 'Én faktura, ett kontaktpunkt' reduserer hverdagsstress."},
+          {line:8,icon:"⚡",text:"'Mens vi er i gang' benytter momentum fra den positive samtalen."}
+        ]},
+      {name:"Avslutning",intro:"Rund av hele samtalen trygt og varmt. Post-salg validering forebygger anger og bygger langvarig lojalitet.",
+        lines:[
+          {s:"S",t:"Supert! Ønsker du eFaktura eller avtalegiro?"},
+          {s:"K",t:"eFaktura passer meg best."},
+          {s:"S",t:"Perfekt. Du mottar bekreftelse på e-post for alle tre forsikringene så snart de er aktive. Og et lite tips: logg inn på klp.no når du har tid — der finner du forsikringsbevisene dine, kan melde skade, og har full oversikt."},
+          {s:"K",t:"Kjempebra. Takk for hjelpen, Karianne!"},
+          {s:"S",t:"Takk til deg! Du sitter nå med personforsikring, bil og hund på ett sted — det er en god dag. Hils kollegaen din fra oss, si at du fikk ordnet alt på én samtale. Velkommen til KLP — vi er her for hverdagens helter!"},
+          {s:"K",t:"Det skal jeg gjøre, haha. Ha det bra!"},
+        ],notes:[
+          {line:0,icon:"🎁",text:"Betalingsmåte som første spørsmål er en klassisk assumptive teknikk."},
+          {line:2,icon:"✅",text:"KLP.no-anbefaling bygger eierskap og lojalitet."},
+          {line:4,icon:"🏅",text:"Referral-sirkelen lukkes. 'Hverdagens helter' anerkjenner målgruppen med varme."}
+        ]}
+    ]
+  }
+];
+
+const OUTCOME_STYLE = {
+  closed:{bg:"rgba(0,74,124,0.07)",border:"rgba(0,74,124,0.28)",icon:"🔒",label:"Resultat: Closet på telefon"},
+  meeting:{bg:"rgba(26,107,60,0.07)",border:"rgba(26,107,60,0.28)",icon:"📅",label:"Resultat: Møte booket — tirsdag kl. 13"},
+  fast:{bg:"rgba(107,45,139,0.07)",border:"rgba(107,45,139,0.28)",icon:"✅",label:"Resultat: Alt closet på telefon"}
+};
+
+let activeScenario = 0, activePhase = 0;
+
+function renderTabs() {
+  document.getElementById('scen-tabs').innerHTML = SCENARIOS.map((s,i) => `
+    <div class="scen-tab ${i===activeScenario?'active':''}"
+      style="${i===activeScenario?`border-color:${s.color};background:${s.bgColor}`:''}"
+      onclick="selectScenario(${i})">
+      <div class="scen-tab-num" style="color:${s.color}">${s.label}</div>
+      <div class="scen-tab-title">${s.title}</div>
+      <div class="scen-tab-sub">${s.subtitle}</div>
+    </div>`).join('');
+}
+
+function renderHero() {
+  const s = SCENARIOS[activeScenario];
+  document.getElementById('scen-hero').innerHTML = `
+    <div class="scen-badge" style="background:${s.bgColor};color:${s.color};border:1px solid ${s.borderColor}">${s.label}</div>
+    <div class="scen-title">${s.title}</div>
+    <div class="scen-sub">${s.subtitle}</div>
+    <div class="meta-pills">${s.meta.map(m=>`<div class="meta-pill">${m}</div>`).join('')}</div>`;
+}
+
+function renderPhaseNav() {
+  const s = SCENARIOS[activeScenario];
+  document.getElementById('phase-nav-klp').innerHTML = s.phases.map((p,i) => `
+    <button class="phase-nav-btn ${i===activePhase?'active':''}"
+      style="${i===activePhase?`color:${s.color}`:''}"
+      onclick="selectPhase(${i})">${p.name}</button>`).join('');
+}
+
+function renderBody() {
+  const s = SCENARIOS[activeScenario];
+  const p = s.phases[activePhase];
+  const isLast = activePhase === s.phases.length - 1;
+  const o = OUTCOME_STYLE[s.outcome];
+  const noteMap = {};
+  (p.notes||[]).forEach(n => { if(!noteMap[n.line]) noteMap[n.line]=[]; noteMap[n.line].push(n); });
+
+  let html = `<div class="phase-intro-box"><div class="phase-intro-lbl">Psykologi & teknikk</div><div class="phase-intro-txt">${p.intro}</div></div>`;
+
+  p.lines.forEach((l,i) => {
+    const isSeller = l.s === 'S';
+    html += `<div class="dialog-line">
+      <div class="spk-chip" style="${isSeller?`background:${s.bgColor};color:${s.color}`:'background:#f0f0ec;color:#888'}">
+        ${isSeller?'S':'K'}
+      </div>
+      <div class="dlg-right">
+        <div class="spk-name" style="color:${isSeller?s.color:'#999'}">${isSeller?'Selger':'Kunde'}</div>
+        <div class="bubble ${isSeller?'seller':''}">${l.t}</div>
+      </div>
+    </div>`;
+    if(noteMap[i]) noteMap[i].forEach(n => {
+      html += `<div class="psy-note-klp" style="background:${s.bgColor};border-color:${s.color}">
+        <span style="font-size:13px">${n.icon}</span><span>${n.text}</span>
+      </div>`;
+    });
+  });
+
+  if(isLast) html += `<div class="outcome-box-klp" style="background:${o.bg};border-color:${o.border}">
+    <div class="outcome-title">${o.icon} ${o.label}</div>
+    <div class="outcome-text">${s.outcomeText}</div>
+  </div>`;
+
+  document.getElementById('scen-body').innerHTML = html;
+  document.getElementById('phase-ctr').textContent = `${activePhase+1} / ${s.phases.length}`;
+  document.getElementById('btn-prev').disabled = activePhase === 0;
+  document.getElementById('btn-next').disabled = activePhase === s.phases.length - 1;
+}
+
+function selectScenario(i) { activeScenario=i; activePhase=0; renderTabs(); renderHero(); renderPhaseNav(); renderBody(); }
+function selectPhase(i) { activePhase=i; renderPhaseNav(); renderBody(); }
+function prevPhase() { if(activePhase>0) selectPhase(activePhase-1); }
+function nextPhase() { const s=SCENARIOS[activeScenario]; if(activePhase<s.phases.length-1) selectPhase(activePhase+1); }
+
+// ── INIT ──
+renderPhases();
+selectScenario(0);
+</script>
+</body>
+</html>
