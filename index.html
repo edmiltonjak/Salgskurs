@@ -186,7 +186,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="showPage('intro',this)">Hva er salg?</button>
       <button class="nav-tab" onclick="showPage('kurs',this)">Salgskurs</button>
-      <button class="nav-tab" onclick="showPage('soyle',this)">Søyleteorien</button>
+      <button class="nav-tab" onclick="showPage('behovs',this)">Behovsanalyse</button>
+      <button class="nav-tab" onclick="showPage('soyle',this)">Trias-modellen</button>
       <button class="nav-tab" onclick="showPage('looping',this)">Looping</button>
       <button class="nav-tab" onclick="showPage('klp',this)">KLP Manuser</button>
     </div>
@@ -211,11 +212,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
-<div class="filter-row">
-  <button class="filter-btn active" onclick="setFilter('all',this)">Alle faser</button>
-  <button class="filter-btn" onclick="setFilter('psy',this)">Psykologi</button>
-  <button class="filter-btn" onclick="setFilter('belfort',this)">Hva Belfort sier</button>
-</div>
 
 <div id="phases-container"></div>
 </div>
@@ -247,20 +243,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <div class="page" id="page-soyle">
 
 <div class="intro-header">
-  <div class="intro-eyebrow">Edmilton Jakobsen · Min teori</div>
-  <div class="intro-title">De tre søylene</div>
-  <div class="intro-sub">Min teori om hva som skaper et salg, og hvorfor balansen mellom Bedrift, Selger og Produkt er nøkkelen til å vinne eller tape en salgssituasjon.</div>
+  <div class="intro-eyebrow">Edmilton Jakobsen · Eget rammeverk</div>
+  <div class="intro-title">Trias-modellen</div>
+  <div class="intro-sub">Et salgsrammeverk jeg har utviklet selv, bygget på idéen om at kunden må like deg, produktet og bedriften.</div>
 </div>
 
 <div style="background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);margin-bottom:20px">
 
+  <!-- Bakgrunn -->
+  <div style="padding:28px 32px 24px;border-bottom:1px solid var(--border)">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Bakgrunn</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">Trias-modellen er et rammeverk jeg har utviklet gjennom egne erfaringer og analyser av hva som faktisk skjer i en salgssituasjon. Akkurat som et gresk tempel trenger alle søylene for å stå stabilt, trenger et salg tre elementer i balanse for å closes.</p>
+  </div>
+
   <!-- Teorien -->
   <div style="padding:28px 32px 24px;border-bottom:1px solid var(--border)">
-    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Teorien</div>
-    <p style="font-size:15px;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:16px">Se for deg en gresk bygning. Tre søyler holder oppe et tak. Det taket er salget.</p>
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Modellen</div>
+    <p style="font-size:15px;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:16px">Se for deg et gresk tempel. Tre søyler holder oppe et tak. Det taket er salget.</p>
     <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">Den venstre søylen er <strong>Bedriften</strong>, tilliten kunden har til selskapet du representerer. Den midtre søylen er <strong>Selgeren</strong>, tilliten og sympatien kunden har til deg som person. Den høyre søylen er <strong>Produktet</strong>, troen på at løsningen faktisk løser problemet deres.</p>
     <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">Når søylene ikke er like høye, vil taket velte, og et veltende tak skaper det farligste av alt i en salgssituasjon: usikkerhet. De nøler, finner på grunner til å ikke handle, og innvendingen de gir deg er sjelden den ekte årsaken. Det er bare taket som har mistet balansen.</p>
-    <p style="font-size:13px;font-weight:600;color:var(--text);line-height:1.8">Du vil aldri få et direkte closing uten at alle tre søylene balanserer salgstaket.</p>
+    <p style="font-size:13px;font-weight:600;color:var(--text);line-height:1.8">Du vil aldri få et direkte closing uten at alle tre søylene i Trias-modellen balanserer salgstaket.</p>
   </div>
 
   <!-- Illustrasjon -->
@@ -269,21 +271,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
       <div style="display:flex;flex-direction:column;align-items:center">
         <div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:8px">Figur 1</div>
-        <canvas id="sc1" height="200" style="display:block;width:100%"></canvas>
+        <canvas id="sc1" height="240" style="display:block;width:100%"></canvas>
         <div style="font-size:12px;font-weight:600;color:#A32D2D;text-align:center;margin-top:8px">Bedrift tipper ned</div>
-        <div style="font-size:10px;color:#999;text-align:center;margin-top:2px">Taket tipper til venstre</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center">
         <div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:8px">Figur 2</div>
-        <canvas id="sc2" height="200" style="display:block;width:100%"></canvas>
+        <canvas id="sc2" height="240" style="display:block;width:100%"></canvas>
         <div style="font-size:12px;font-weight:600;color:#3B6D11;text-align:center;margin-top:8px">Alle søyler balansert</div>
-        <div style="font-size:10px;color:#999;text-align:center;margin-top:2px">Taket stabilt, optimalt salg</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center">
         <div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:8px">Figur 3</div>
-        <canvas id="sc3" height="200" style="display:block;width:100%"></canvas>
+        <canvas id="sc3" height="240" style="display:block;width:100%"></canvas>
         <div style="font-size:12px;font-weight:600;color:#A32D2D;text-align:center;margin-top:8px">Produkt tipper ned</div>
-        <div style="font-size:10px;color:#999;text-align:center;margin-top:2px">Taket tipper til høyre</div>
       </div>
     </div>
   </div>
@@ -399,7 +398,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <div style="display:flex;gap:14px;align-items:flex-start">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">5</div>
         <div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Gjenta ved behov</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.7">Ny innvending? Ny loop. Samme struktur. Økt emosjonell intensitet. De fleste salg lukkes ikke ved første forsøk. De som vinner er de som fortsetter.</div></div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.7">Ny innvending? Ny loop. Samme struktur. Økt emosjonell intensitet. De fleste salg closes ikke ved første forsøk. De som vinner er de som fortsetter.</div></div>
       </div>
     </div>
   </div>
@@ -469,6 +468,169 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 </div>
 </div>
 
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!--  PAGE: BEHOVSANALYSE                                    -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="page" id="page-behovs">
+<div style="max-width:900px;margin:0 auto;padding:32px 20px 80px">
+
+<div style="background:linear-gradient(135deg,#0d1b2a 0%,#1a2f4a 55%,#0d3b6e 100%);border-radius:16px;padding:44px 44px 36px;margin-bottom:24px;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(229,160,64,.1);pointer-events:none"></div>
+  <div style="font-size:11px;font-weight:600;color:rgba(229,160,64,.9);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Edmilton Jakobsen · Salgsteknikk</div>
+  <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px">Behovsanalyse</div>
+  <div style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.65;max-width:520px">Den viktigste fasen i hele salget. Her vinner eller taper du, ikke i presentasjonen og ikke i closingen.</div>
+</div>
+
+<!-- Teori -->
+<div style="background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:20px">
+  <div style="padding:28px 32px;border-bottom:1px solid var(--border)">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Hvorfor behovsanalysen er alt</div>
+    <p style="font-size:15px;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:16px">De fleste selgere er for raske til å presentere. De hører at kunden er interessert og starter med produktet med en gang. Det er en feil som koster salg.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">Når du forstår hva kunden egentlig trenger, dypere enn de selv har formulert det, selger produktet seg selv. Du trenger ikke overbevise noen om noe. Du viser bare at løsningen passer perfekt til det de allerede vet de trenger.</p>
+    <p style="font-size:13px;font-weight:600;color:var(--text);line-height:1.8">Lytt mer enn du snakker. De beste behovsanalysene har ett fellestrekk: selgeren snakker mindre enn 30% av tiden.</p>
+  </div>
+  <div style="padding:28px 32px;border-bottom:1px solid var(--border)">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">De tre lagene av behov</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:#f7f7f5;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Lag 1: Det logiske behovet</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">Det kunden sier de vil ha. "Jeg trenger bilforsikring." Lett å finne, men ikke nok til å skape et sterkt salg.</div>
+      </div>
+      <div style="background:#f7f7f5;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Lag 2: Det emosjonelle behovet</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">Hvorfor de egentlig vil ha det. Trygghet for familien. Slippe å bekymre seg. Ikke bli lurt. Her sitter motivasjonen.</div>
+      </div>
+      <div style="background:#f7f7f5;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Lag 3: Smerten ved å ikke handle</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">Hva skjer om de ikke gjør noe? Det kraftigste laget, og det mest underutnyttede. Ikke for å skremme, men for å gjøre konsekvensene reelle.</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:28px 32px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Oppsummer tilbake</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">Når du har kartlagt behovet, oppsummer det tilbake i kundens egne ord. De føler seg hørt, og du bekrefter at du har forstått riktig.</p>
+    <div style="border-left:3px solid var(--gold);padding:14px 18px;background:rgba(229,160,64,.06);border-radius:0 8px 8px 0">
+      <p style="font-size:14px;font-weight:500;color:var(--text);font-style:italic;line-height:1.7">"Så det jeg hører er at du vil ha trygghet for familien, du er lei av å ikke forstå hva du betaler for, og du vil samle alt ett sted. Er det riktig?"</p>
+    </div>
+  </div>
+</div>
+
+<!-- Åpne spørsmål -->
+<div style="background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:20px">
+  <div style="padding:22px 32px;background:#0d1b2a;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff">Åpne spørsmål</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-top:4px">Spørsmål som åpner samtalen og avslører behovet</div>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(0,74,124,.07);color:#004A7C;border:1px solid rgba(0,74,124,.3);margin-bottom:14px">Intro</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Hva fikk deg til å ringe oss i dag?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Hva er det viktigste for deg når du ser på forsikring?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Har du hatt noen erfaringer med forsikring som har vært positive eller negative?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Hva vet du om KLP fra før?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Hva er det du håper vi kan hjelpe deg med?</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(26,107,60,.07);color:#1A6B3C;border:1px solid rgba(26,107,60,.3);margin-bottom:14px">Behovsanalyse</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hva slags dekning har du i dag, og hva betaler du?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hva er det du ikke er helt fornøyd med hos ditt nåværende selskap?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hvor lenge har du vært hos dem du er hos nå?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Har du opplevd å melde en skade, og hvordan var den opplevelsen?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hva er det viktigste for deg i en forsikringsavtale?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hvis du skulle beskrive den perfekte forsikringen, hvordan hadde den sett ut?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Har du barn eller andre du forsørger som er avhengig av inntekten din?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Hva ville skjedd med hverdagen din hvis du ble alvorlig syk i ett år?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#1A6B3C;font-weight:600;flex-shrink:0">›</span>Er det noe ved situasjonen din i dag som gjør deg litt urolig når du tenker på det?</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(107,45,139,.07);color:#6B2D8B;border:1px solid rgba(107,45,139,.3);margin-bottom:14px">Under produktgjennomgang</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Høres dette ut som noe som passer for deg?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Er det noe her du vil at jeg skal utdype?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Hva tenker du om den dekningen sammenlignet med det du har i dag?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Er dette bedre eller dårligere enn det du hadde sett for deg?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Hva er det første du legger merke til her?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Føler du at dette dekker det du fortalte meg var viktig for deg?</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(196,120,32,.07);color:#C47820;border:1px solid rgba(196,120,32,.3);margin-bottom:14px">Under oppsummering</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#C47820;font-weight:600;flex-shrink:0">›</span>Er det noe vi har gått gjennom som du vil at jeg skal gå gjennom en gang til?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#C47820;font-weight:600;flex-shrink:0">›</span>Føler du at du har fått svar på alt du lurte på?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#C47820;font-weight:600;flex-shrink:0">›</span>Er det noe vi ikke har snakket om som du tenker er viktig?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#C47820;font-weight:600;flex-shrink:0">›</span>Hva er din første tanke nå som du har hørt alt?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#C47820;font-weight:600;flex-shrink:0">›</span>Sitter du igjen med noen spørsmål?</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(163,45,45,.07);color:#A32D2D;border:1px solid rgba(163,45,45,.3);margin-bottom:14px">Før closing</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Bortsett fra pris, er dette løsningen du ønsker?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Hva er det eneste som stopper deg fra å sette dette i gang i dag?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Om vi kan ordne det du er usikker på, er du klar til å gå videre?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Hva trenger du for å føle deg trygg på denne beslutningen?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Er det noe jeg ikke har forklart godt nok?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Assumptive -->
+<div style="background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:20px">
+  <div style="padding:22px 32px;background:#0d1b2a;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff">Assumptive teknikker</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-top:4px">Setninger som handler som om salget allerede er i gang</div>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(0,74,124,.07);color:#004A7C;border:1px solid rgba(0,74,124,.3);margin-bottom:14px">Assumptive åpninger</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Jeg regner med at, som alle andre, om du får like god dekning til en bedre pris, så flytter du forsikringene dine til oss.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Siden du ringer oss i dag, antar jeg at du allerede er åpen for å se på noe nytt.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>De fleste som ringer oss ender opp med å bytte. Det er ikke tilfeldig.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Du har allerede tatt det smarteste steget ved å ringe oss i dag.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#004A7C;font-weight:600;flex-shrink:0">›</span>Siden du er KLP-medlem, har du allerede tilgang til noe de fleste ikke vet de har.</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px;border-bottom:1px solid var(--border)">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(107,45,139,.07);color:#6B2D8B;border:1px solid rgba(107,45,139,.3);margin-bottom:14px">Assumptive setninger underveis</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Nå som du ser hva du får, skjønner du sikkert hvorfor så mange av kollegaene dine allerede er her.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Dette er akkurat det du fortalte meg at du trengte.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Du kan se at dette passer perfekt til situasjonen din.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Nå som vi har gått gjennom alt, ser du at dette er et enkelt valg.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Det er tydelig at dette gir deg det du manglet hos ditt nåværende selskap.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#6B2D8B;font-weight:600;flex-shrink:0">›</span>Akkurat som kollegaen din oppdaget, er dette bare en fornuftig beslutning.</li>
+    </ul>
+  </div>
+
+  <div style="padding:22px 32px">
+    <div style="display:inline-flex;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(163,45,45,.07);color:#A32D2D;border:1px solid rgba(163,45,45,.3);margin-bottom:14px">Assumptive closinger</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Ønsker du eFaktura eller avtalegiro?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Vil du at dette skal starte fra første eller neste måned?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Jeg setter dette opp nå, så er du ferdig på fem minutter.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Du trenger bare å bekrefte, så tar jeg meg av resten.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Nå er det bare ett steg igjen. Ønsker du bekreftelsen på SMS eller e-post?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Da setter vi dette i gang. Hva er adressen din?</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Perfekt. Da er du i samme situasjon som kollegaene dine som allerede er her.</li>
+      <li style="display:flex;gap:8px;font-size:13px;color:var(--muted);line-height:1.6"><span style="color:#A32D2D;font-weight:600;flex-shrink:0">›</span>Nå sparer jeg deg så mye, hva er det å tenke på!</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+</div>
 
 <div class="page" id="page-klp">
 
@@ -547,7 +709,7 @@ const phases = [
       {icon:"🏅",title:"Sosial bevis",desc:"'Andre i din situasjon har valgt dette.' Jo mer konkret og nært, jo sterkere effekt."},
       {icon:"⏰",title:"Knapphet & FOMO",desc:"Fear of Missing Out er en primitiv overlevelsesmekanisme. Reell knapphet aktiverer umiddelbar handling."}
     ],
-    belfort:"Belfort sitt loop-konsept: presenter → lukk → håndter innvending → presenter på nytt med høyere emosjonell intensitet. Det jeg har lagt til: dokumenter hvilke argumenter som funker best for ulike kundetyper.",
+    belfort:"Belfort sitt loop-konsept: presenter → close → håndter innvending → presenter på nytt med høyere emosjonell intensitet. Det jeg har lagt til: dokumenter hvilke argumenter som funker best for ulike kundetyper.",
     keys:["Bruk sosial bevis fra samme bransje og situasjon som kunden","Micro-commitment: få tre små 'ja' før du spør om det store","Knytt hvert argument direkte til det kunden SA i behovsanalysen","Bruk konkrete tall, vage påstander virker usanne"],
     quote:{text:"Overbevisning er ikke manipulasjon. Det er å hjelpe noen se det du allerede ser.",src:"Robert Cialdini. Et skille jeg mener er avgjørende for langsiktig salgssuksess."}
   },
@@ -669,7 +831,7 @@ function updateProg() {
 const SCENARIOS = [
   {
     id:0,color:"#004A7C",bgColor:"rgba(0,74,124,0.07)",borderColor:"rgba(0,74,124,0.28)",
-    label:"Scenario 1",title:"Bilforsikring, innvending, closet på telefon",
+    label:"Scenario 1",title:"Bilforsikring, innvending, closes på telefon",
     subtitle:"Kunden sammenligner pris. KLP-modellen og humor snur bildet",
     meta:["KLP-medlem · 36 år","VW ID.4 2022","Innkommende · Ca. 10 min"],
     outcome:"closed",outcomeText:"KLP-fellesskapet og humoren om kolleger på pauserommet snur bildet. Kunden forstår at det beste tilbudet allerede er på bordet og setter forsikringen i gang.",
@@ -688,7 +850,7 @@ const SCENARIOS = [
         notes:[{line:0,icon:"⚖️",text:"'Det eneste tilbudet vi har' signaliserer integritet og fjerner mistanken om et bedre skjult tilbud."},{line:2,icon:"🔮",text:"Kort forventningsstyring uten å gjenta KLP-argumentet. Kunden har hørt det. Nå er det prisen som taler."}]},
       {name:"Innvending",intro:"Kunden vil sjekke konkurrentene, naturlig. Ikke motarbeid det. Plant et frø om hva de faktisk sammenligner mot.",
         lines:[{s:"K",t:"Jeg har lyst til å sjekke et par til bare, så jeg er sikker."},{s:"S",t:"Det er helt fornuftig. Det eneste jeg vil be deg om å huske på når du sammenligner: spør dem om prisen er den beste de kan gi deg, eller om det finnes en bedre deal om du ber om det. Svaret der sier ganske mye."},{s:"K",t:"Ja, det er et godt poeng."},{s:"S",t:"Og om du kommer tilbake til oss, er tilbudet det samme. Ingen tidspresse, ingen 'kampanje som løper ut'. Det er ikke sånn vi jobber."},{s:"K",t:"Egentlig... jeg vet jo hva de andre kommer til å si. Jeg har vært gjennom det før. Kan vi bare sette det opp nå?"}],
-        notes:[{line:1,icon:"🧠",text:"Revers psykologi: selger oppmuntrer til sammenligning og gir kunden en test å stille konkurrentene."},{line:3,icon:"🔒",text:"'Ingen tidspresse' fjerner det siste presset, paradoksalt nok det som akselererer beslutningen."},{line:4,icon:"⚡",text:"Kunden lukker seg selv. Den psykologiske reisen gjennom KLP-modellen gjorde jobben."}]},
+        notes:[{line:1,icon:"🧠",text:"Revers psykologi: selger oppmuntrer til sammenligning og gir kunden en test å stille konkurrentene."},{line:3,icon:"🔒",text:"'Ingen tidspresse' fjerner det siste presset, paradoksalt nok det som akselererer beslutningen."},{line:4,icon:"⚡",text:"Kunden closer seg selv. Den psykologiske reisen gjennom KLP-modellen gjorde jobben."}]},
       {name:"Closing",intro:"Gjennomfør enkelt og trygt. Spør om betalingsmåte som naturlig del av oppsettet og avslutt med KLPs signaturlinje.",
         lines:[{s:"S",t:"Supert! Ønsker du eFaktura eller avtalegiro?"},{s:"K",t:"eFaktura passer best for meg."},{s:"S",t:"Perfekt. Du mottar en bekreftelse på e-post så snart forsikringen er aktiv. Og et lite tips: logg inn på klp.no og ta en titt rundt, der finner du forsikringsbeviset ditt, kan melde skade, og har full oversikt."},{s:"K",t:"Det skal jeg gjøre. Takk!"},{s:"S",t:"Velkommen til KLP! Ta gjerne kontakt med oss om det er noe mer vi kan hjelpe deg med. Vi er her for hverdagens helter. Ha en fin dag!"}],
         notes:[{line:0,icon:"🎁",text:"Betalingsmåte som første spørsmål er en klassisk assumptive teknikk. Kunden følger flyten."},{line:2,icon:"✅",text:"KLP.no-anbefaling bygger eierskap og lojalitet, reduserer kansellering."},{line:4,icon:"🏅",text:"'Hverdagens helter' anerkjenner målgruppen med varme. Åpen dør for fremtidig kontakt."}]}
@@ -701,7 +863,7 @@ const SCENARIOS = [
     meta:["KLP-medlem · 43 år","Ny enebolig · Hus, 2 biler, innbo, liv","Innkommende · Ca. 12 min"],
     outcome:"meeting",outcomeText:"Kunden er overveldet av pakken og trenger tid. Selger bruker to-alternativ teknikk og booker møtet direkte. Møtebekreftelse sendes på SMS.",
     phases:[
-      {name:"Åpning",intro:"Innkommende call fra et KLP-medlem som nettopp har kjøpt bolig. Med en potensiell portefølje på 80 000+ er det kritisk å ikke prøve å lukke på telefon.",
+      {name:"Åpning",intro:"Innkommende call fra et KLP-medlem som nettopp har kjøpt bolig. Med en potensiell portefølje på 80 000+ er det kritisk å ikke prøve å close på telefon.",
         lines:[{s:"S",t:"Takk for at du ringer KLP Forsikring, du snakker med Anders. Hva kan jeg hjelpe deg med?"},{s:"K",t:"Hei, jeg har akkurat kjøpt meg enebolig og vil egentlig samle all forsikringen min ett sted. Jeg har ingenting skikkelig på plass ennå."},{s:"S",t:"Gratulerer. Det er en stor dag! Og det er veldig klokt å tenke helhetlig fra starten. For å gi deg den beste løsningen vil jeg stille deg noen spørsmål først, så vi ikke setter opp noe generisk, men noe som faktisk passer din situasjon. Er det greit?"},{s:"K",t:"Ja, absolutt."}],
         notes:[{line:2,icon:"🧠",text:"'Ikke noe generisk', posisjonerer selger som rådgiver. Aktiverer kundens ønske om å bli sett som et individ."}]},
       {name:"Behovsanalyse",intro:"Kunden er KLP-medlem med pensjonsordning gjennom arbeidsgiver, men er ikke nødvendigvis klar over hva den dekker ved langvarig sykdom.",
@@ -723,7 +885,7 @@ const SCENARIOS = [
     label:"Scenario 3",title:"Personforsikring + mersalg bil & hund",
     subtitle:"Full tillit via kollegareferral, alt samlet på én samtale",
     meta:["KLP-medlem · 49 år","Uføre + kritisk sykdom + bil + hund","Innkommende · Ca. 14 min"],
-    outcome:"fast",outcomeText:"Kunden er varm inn via kollegareferral. Innbo og reise beholdes i forbundet. Selger anerkjenner dette ærlig. Bil og hund flyttes naturlig til KLP. Alt closet på én samtale.",
+    outcome:"fast",outcomeText:"Kunden er varm inn via kollegareferral. Innbo og reise beholdes i forbundet. Selger anerkjenner dette ærlig. Bil og hund flyttes naturlig til KLP. Alt closes på én samtale.",
     phases:[
       {name:"Åpning",intro:"Innkommende call med referral fra en kollega, bokstavelig talt, da begge er KLP-berettigede offentlig ansatte. Selger trenger ikke spørre om kunden jobber.",
         lines:[{s:"S",t:"Takk for at du ringer KLP Forsikring, du snakker med Karianne. Hva kan jeg hjelpe deg med?"},{s:"K",t:"Hei, en kollega av meg fortalte om KLP og at det var veldig bra. Jeg har aldri hatt personforsikring og tenker at det er på tide å få det på plass."},{s:"S",t:"Det er veldig hyggelig å høre, og absolutt på tide. Personforsikring er noe mange utsetter lenger enn de burde. Og det er jo ikke tilfeldig at kollegaen din anbefalte oss, som KLP-medlem har du allerede tilgang til oss gjennom jobben. Kan jeg spørre litt om situasjonen din?"},{s:"K",t:"Ja, det er fint."}],
@@ -739,15 +901,15 @@ const SCENARIOS = [
         notes:[{line:2,icon:"🤝",text:"Selger anerkjenner forbundsforsikringen ærlig, prøver ikke å ta den. Bygger enorm tillit."},{line:6,icon:"🧩",text:"Selger selger oversikt og enkelhet. 'Én faktura, ett kontaktpunkt' reduserer kognitiv belastning."},{line:8,icon:"⚡",text:"'Mens vi er i gang' benytter momentum fra den positive samtalen."}]},
       {name:"Avslutning",intro:"Rund av hele samtalen trygt og varmt. Post-salg validering forebygger anger og bygger langvarig lojalitet.",
         lines:[{s:"S",t:"Supert! Ønsker du eFaktura eller avtalegiro?"},{s:"K",t:"eFaktura passer meg best."},{s:"S",t:"Perfekt. Du mottar bekreftelse på e-post for alle tre forsikringene så snart de er aktive. Og et lite tips: logg inn på klp.no når du har tid, der finner du forsikringsbevisene dine og har full oversikt."},{s:"K",t:"Kjempebra. Takk for hjelpen, Karianne!"},{s:"S",t:"Takk til deg! Du sitter nå med personforsikring, bil og hund på ett sted. Det er en god dag. Hils kollegaen din fra oss. Velkommen til KLP. Vi er her for hverdagens helter!"},{s:"K",t:"Det skal jeg gjøre, haha. Ha det bra!"}],
-        notes:[{line:0,icon:"🎁",text:"Betalingsmåte som første spørsmål er en klassisk assumptive teknikk."},{line:2,icon:"✅",text:"KLP.no-anbefaling bygger eierskap og lojalitet."},{line:4,icon:"🏅",text:"Referral-sirkelen lukkes. 'Hverdagens helter' anerkjenner målgruppen."}]}
+        notes:[{line:0,icon:"🎁",text:"Betalingsmåte som første spørsmål er en klassisk assumptive teknikk."},{line:2,icon:"✅",text:"KLP.no-anbefaling bygger eierskap og lojalitet."},{line:4,icon:"🏅",text:"Referral-sirkelen closes. 'Hverdagens helter' anerkjenner målgruppen."}]}
     ]
   }
 ];
 
 const OUTCOME_STYLE = {
-  closed:{bg:"rgba(0,74,124,0.07)",border:"rgba(0,74,124,0.3)",icon:"🔒",label:"Resultat: Closet på telefon"},
+  closed:{bg:"rgba(0,74,124,0.07)",border:"rgba(0,74,124,0.3)",icon:"🔒",label:"Resultat: Closes på telefon"},
   meeting:{bg:"rgba(26,107,60,0.07)",border:"rgba(26,107,60,0.3)",icon:"📅",label:"Resultat: Møte booket, tirsdag kl. 13"},
-  fast:{bg:"rgba(107,45,139,0.07)",border:"rgba(107,45,139,0.3)",icon:"✅",label:"Resultat: Alt closet på telefon"}
+  fast:{bg:"rgba(107,45,139,0.07)",border:"rgba(107,45,139,0.3)",icon:"✅",label:"Resultat: Alt closes på telefon"}
 };
 
 let activeScenario = 0, activePhase = 0;
@@ -925,7 +1087,7 @@ function drawTemple(id, h0, h2, rotDeg, roofColor) {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const W = canvas.offsetWidth || 180;
-  const H = 200;
+  const H = 240;
   canvas.width = W*dpr; canvas.height = H*dpr;
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, W, H);
@@ -937,7 +1099,7 @@ function drawTemple(id, h0, h2, rotDeg, roofColor) {
   const outline = dark ? '#5a3010' : '#8B4513';
   const roofShad = roofColor==='#7BAD3C' ? '#4a7a10' : '#8B4510';
   const isGreen  = roofColor==='#7BAD3C';
-  const textCol  = dark ? '#ddd' : '#555';
+  const textCol  = dark ? '#fff' : '#111';
   const LW = 2.2;
 
   const NAMES  = ['Bedrift','Selger','Produkt'];
@@ -981,8 +1143,8 @@ function drawTemple(id, h0, h2, rotDeg, roofColor) {
     ctx.strokeStyle=fill3;ctx.lineWidth=0.9;
     for(let r=-1;r<=2;r++){ctx.beginPath();ctx.moveTo(x+r*4.5,bot-baseH);ctx.lineTo(x+r*4.5-r*0.5,top);ctx.stroke();}
     ctx.restore();
-    ctx.fillStyle=textCol;ctx.font='500 9px sans-serif';ctx.textAlign='center';
-    ctx.fillText(NAMES[i],x,floorY+14);
+    ctx.fillStyle='#333';ctx.font='600 10px sans-serif';ctx.textAlign='center';
+    ctx.fillText(NAMES[i],x,floorY+16);
   });
 
   const entH=14,entL=xs[0]-colW/2-14,entR=xs[2]+colW/2+14;
