@@ -185,7 +185,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div class="nav-logo">EJ <span>·</span> Salg</div>
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="showPage('intro',this)">Hva er salg?</button>
-      <button class="nav-tab" onclick="showPage('kurs',this)">Salgskurs</button>
+      <button class="nav-tab" onclick="showPage('kurs',this)">Salgsstruktur</button>
       <button class="nav-tab" onclick="showPage('behovs',this)">Behovsanalyse</button>
       <button class="nav-tab" onclick="showPage('soyle',this)">Trias-modellen</button>
       <button class="nav-tab" onclick="showPage('looping',this)">Looping</button>
@@ -203,13 +203,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <div class="course-header">
   <div class="author-row">
     <div class="author-av">EJ</div>
-    <div class="author-label">EDMILTON JAKOBSEN · SALGSKURS</div>
+    <div class="author-label">EDMILTON JAKOBSEN · SALGSSTRUKTUR</div>
   </div>
-  <div class="course-title">Kunsten å selge –<br>Innsiden av hjernen</div>
-  <div class="course-sub">Mine innsikter fra år med analyse av salgsprosessen, bygget på psykologisk forskning og det jeg har lært av å studere Jordan Belforts metoder.</div>
-  <div class="prog-row">
-    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
-    <div class="prog-label" id="prog-label">0 / 6 faser</div>
+  <div class="course-title">Salgsstruktur</div>
+  <div class="course-sub">Samme bane i hvert salg. Struktur skaper trygghet, trygghet skaper tillit, og tillit closes salg.</div>
+</div>
+
+<div style="background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);margin-bottom:20px">
+  <div style="padding:28px 32px">
+    <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px">De fleste selgere taper ikke fordi de mangler kunnskap. De taper fordi de mangler struktur. De hopper over steg, improviserer for mye, og ender opp med samtaler som ikke har en tydelig retning. Kunden merker det. Ikke alltid bevisst, men de kjenner at noe er rotete, og rotete skaper usikkerhet. Usikkerhet taper salg.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.8">En god salgsstruktur er ikke en tvangstrøye. Det er et kart. Du vet alltid hvor du er, hvor du skal, og hva neste steg er. Hopper du over én fase, betaler du for det senere, ofte i form av en innvending du ikke klarer å håndtere fordi du ikke la grunnlaget tidlig nok.</p>
   </div>
 </div>
 
@@ -908,10 +911,6 @@ function renderCourse() {
 
     if (isDone) {
       body += `<div class="done-tag">✓ Fullført</div>`;
-    } else if (i < phases.length - 1) {
-      body += `<button class="next-btn" onclick="markDone(${i});openPhase(${i+1})">Neste fase: ${phases[i+1].name} →</button>`;
-    } else {
-      body += `<button class="next-btn" onclick="markDone(${i})">✓ Fullfør kurs</button>`;
     }
 
     div.innerHTML = `
@@ -948,8 +947,10 @@ function setFilter(f, btn) {
 }
 function updateProg() {
   const pct = Math.round(completedPhases.size / phases.length * 100);
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = completedPhases.size + ' / ' + phases.length + ' faser';
+  const fill = document.getElementById('prog-fill');
+  const label = document.getElementById('prog-label');
+  if(fill) fill.style.width = pct + '%';
+  if(label) label.textContent = completedPhases.size + ' / ' + phases.length + ' faser';
 }
 
 /* ════════════════════════════════════════════════════════ */
